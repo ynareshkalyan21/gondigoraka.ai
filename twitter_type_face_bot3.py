@@ -1,15 +1,32 @@
 import csv
+import datetime
+
 import nltk
 from nltk.corpus import stopwords
 from collections import Counter
 import matplotlib.pyplot as plt
+import csv
+import urllib.request
+
+filename = "https://storage.googleapis.com/goraka-prod/gondi-ai/Twitter%20Jan%20Mar.csv"
+
+# Download the file and save it locally
+local_filename, _ = urllib.request.urlretrieve(filename)
+
+with open(local_filename, 'r') as file:
+    # Create a CSV reader object
+    reader = csv.reader(file)
+
+    # Skip the header row
+    next(reader)
+
+    # Rest of your code...
 
 # Download the stopwords list if not already downloaded
 nltk.download('stopwords')
 
 filename = 'Twitter Jan Mar.csv'
-filename = 'https://storage.googleapis.com/goraka-prod/gondi-ai/Twitter%20Jan%20Mar.csv
-
+filename= "https://storage.googleapis.com/goraka-prod/gondi-ai/Twitter%20Jan%20Mar.csv"
 # Lists to store the relevant data
 tweet_content = []
 like_counts = Counter()
@@ -20,8 +37,10 @@ most_freq_counts = Counter()
 stopwords_list = set(stopwords.words('english'))
 stopwords_list.update(["is", "the", "like", "1/", "\"", "\'\'", "https"])
 
+local_filename, _ = urllib.request.urlretrieve(filename)
+
 # Open the CSV file
-with open(filename, 'r') as file:
+with open(local_filename, 'r') as file:
     # Create a CSV reader object
     reader = csv.reader(file)
 
@@ -68,7 +87,7 @@ with open(filename, 'r') as file:
 
         # Print progress every chunk_size rows
         if rows_processed % chunk_size == 0:
-            print(f"Processed {rows_processed} rows")
+            print(f"{datetime.datetime.now()} Processed {rows_processed} rows")
 
 size = 20
 most_repeated_words_weight = 10000
@@ -85,7 +104,7 @@ most_retweeted_words = [word for word, count in retweet_counts.most_common()[:mo
 
 # Find the intersection of the three factors
 common_trending_words = set(most_repeated_words) & set(most_liked_words) & set(most_retweeted_words)
-
+common_trending_words = list(common_trending_words)[:20]
 # Print the common trending words
 print("Common Trending Words:")
 for word in common_trending_words:
@@ -131,6 +150,19 @@ ax3.set_xticklabels(top_retweeted_words, rotation=90)
 ax3.set_xlabel('Words')
 ax3.set_ylabel('Retweet Count')
 ax3.set_title('Most Retweeted Words')
+
+
+# Display the common trending words as subplots of the figure
+common_words = list(common_trending_words)
+num_common_words = len(common_words)
+num_rows = num_common_words // 10 + 1
+
+for i, word in enumerate(common_trending_words):
+    sub_ax = fig.add_subplot(num_rows, 10, i+1)
+    sub_ax.text(0.5, 0.5, f"Rank {i+1}\n{word}", fontsize=10, ha='center', va='center')
+    sub_ax.axis('off')
+
+
 
 plt.tight_layout()
 plt.show()
