@@ -9,6 +9,7 @@ Run the script using Python:
 
 python twitter_type_face_bot3.py
 The script will process the Twitter data, print the common trending words, and display three bar charts representing the most repeated words, most liked words, and most retweeted words.
+
 Examples
 Here are some examples of the generated charts:
 
