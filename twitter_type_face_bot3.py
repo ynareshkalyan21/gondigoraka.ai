@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 nltk.download('stopwords')
 
 filename = 'Twitter Jan Mar.csv'
+filename = 'https://storage.googleapis.com/goraka-prod/gondi-ai/Twitter%20Jan%20Mar.csv
 
 # Lists to store the relevant data
 tweet_content = []
