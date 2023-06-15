@@ -3,12 +3,14 @@
 Twitter Trending Words Analysis
 This repository contains code to analyze trending words on Twitter. The code uses a CSV file of Twitter data to identify the most repeated, liked, and retweeted words. The code also visualizes the results using bar charts.
 
-Requirements
+Requirements:
 Python 3.6 or higher
 NumPy
 Matplotlib
 NLTK
-Usage
+
+
+Usage:
 Clone the repository to your local machine.
 Install the requirements using pip install -r requirements.txt.
   Run the code using python twitter_type_face_bot3.py.
